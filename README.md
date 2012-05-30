@@ -61,7 +61,7 @@ AppConfig = BasicConfig.load_env('config.yml', Rails.env)
 
 ## Why should I use it instead of plain Hash variables?
 
-### It raises errors when you unintentionally read non-existent keys:
+### It raises errors when you unintentionally read non-existent keys
 
 If you are using a `Hash`:
 ```ruby
@@ -83,7 +83,7 @@ particular key exist in your config - `AppConfig.include?(:something)`.
 Additionaly, for some keys it makes sense to get a `nil` when they do not exist and for this
 purpose there is a `[]` method which is delegated to underlying hash.
 
-### Works recursively.
+### Works recursively
 
 If your YAML is more than 1 level deep then simple `symbolize_keys` is not going to be enough:
 ```ruby
@@ -95,7 +95,7 @@ With BasicConfig above would look like this:
 AppConfig.something.have_to_use_string_here
 ```
 
-### Easier to test.
+### Easier to test
 
 You can stub out any config variable just like a normal method in your tests.
 
