@@ -25,7 +25,12 @@ Or install it via RubyGems as:
 ## Usage
 
 ```ruby
+# Loading config is simple
 settings = BasicConfig.load_file('config.yml')
+# It's a simple variable, you can create as many as you like.
+# You can use constants for convinience:
+AppConfig = BasicConfig.load_file('config/app.yml')
+DatabaseConfig = BasicConfig.load_file('config/database.yml')
 
 # Access your configuration with simple method calls
 settings.some_param
