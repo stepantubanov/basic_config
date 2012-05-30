@@ -3,7 +3,12 @@ require 'yaml'
 class BasicConfig
   def initialize(hash)
     raise ArgumentError, 'Hash can not be nil' if hash.nil?
-    @hash = hash.symbolize_keys
+
+    # Symbolize keys: don't want to add ActiveSupport dependency just for this.
+    @hash = hash.inject({}) do |h, (key, value)|
+      h[key.to_sym] = value
+      h
+    end
 
     @hash.each do |key, value|
       @hash[key] = BasicConfig.new(value) if value.is_a?(Hash)
