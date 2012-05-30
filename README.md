@@ -50,7 +50,7 @@ If your file has sections for different environments:
 development:
   host: localhost
   port: 123
-test
+test:
   host: localhost
   port: 456
 ```
