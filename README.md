@@ -67,8 +67,8 @@ If you are using a `Hash`:
 ```ruby
 secret_token = AppConfig[:something]
 ```
-and for some reason your configuration does not have `:something` in it - you'll
-get a `nil`. Worst case: this `nil` will live inside your system compromising
+and for some reason your configuration does not have `:something` in it (or you
+make a typo) - you'll get a `nil`. Worst case: this `nil` will live inside your system compromising
 or corrupting some data until you finally notice and track it down back to this line.
 
 If you are using a `BasicConfig`:
