@@ -97,3 +97,9 @@ You can stub out any config variable just like a normal method in your tests.
 ```ruby
 AppConfig.stub(:something).and_return('anything')
 ```
+
+## Gotchas
+
+The only thing that I can think of is be aware that you can not use Ruby Object
+method names for your configuration variable names (`puts`, `print`, `raise`,
+`display`, etc, you can see the full list with `BasicConfig.methods`).
