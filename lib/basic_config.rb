@@ -15,10 +15,6 @@ class BasicConfig
     end
   end
 
-  def fetch(key)
-    @hash.fetch(key)
-  end
-
   def [](key)
     @hash[key]
   end
