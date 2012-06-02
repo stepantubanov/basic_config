@@ -1,5 +1,7 @@
 # BasicConfig
 
+[![Build Status](https://secure.travis-ci.org/stephan778/basic_config.png)](http://travis-ci.org/stephan778/basic_config)
+
 Friendly configuration wrapper. If you find yourself using things like:
 
 ```ruby
