@@ -1,5 +1,4 @@
 require_relative '../lib/basic_config'
-require 'active_support/core_ext/hash'
 
 describe BasicConfig do
   let(:hash) do
@@ -8,6 +7,15 @@ describe BasicConfig do
       'two' => 'other_value',
       'three' => {
         'nested' => '123'
+      }
+    }
+  end
+  let(:symbolized_hash) do
+    {
+      :one => 'something',
+      :two => 'other_value',
+      :three => {
+        :nested => '123'
       }
     }
   end
@@ -43,9 +51,7 @@ describe BasicConfig do
   end
 
   it 'can be converted back to hash' do
-    converted = subject.to_hash.stringify_keys
-    converted['three'] = converted['three'].stringify_keys
-    converted.should == hash
+    subject.to_hash.should == symbolized_hash
   end
 
   describe '::load_file' do
