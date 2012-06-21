@@ -84,11 +84,13 @@ if you're constructing BasicConfig with `new`, then it'll show source code
 location where BasicConfig is initialized.
 
 ```ruby
+# Let's say this is config.rb, line 7:
 AppConfig = BasicConfig.new({ secret_token: 'something' })
-secret_token = AppConfig.secret_toklen # Note a typo here
 
-# Will result in exception:
-# BasicConfig::NotFound: Configuration key 'secret_toklen' is missing in BasicConfig constructed at your_file.rb:5 in `new'
+# And this is somewhere in some method in another file:
+secret_token = AppConfig.secret_toklen # Note a typo here
+# Above line will result in BasicConfig::NotFound exception with message:
+# Configuration key 'secret_toklen' is missing in BasicConfig constructed at config.rb:7 in `method'
 ```
 
 *Note:* There is also an `include?` method which you can use to check if
