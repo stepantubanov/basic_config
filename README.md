@@ -1,6 +1,4 @@
-# BasicConfig
-
-[![Build Status](https://secure.travis-ci.org/stephan778/basic_config.png)](http://travis-ci.org/stephan778/basic_config)
+# BasicConfig [![Build Status](https://secure.travis-ci.org/stephan778/basic_config.png)](http://travis-ci.org/stephan778/basic_config)
 
 Friendly configuration wrapper. If you find yourself using things like:
 
@@ -75,10 +73,23 @@ or corrupting some data until you finally notice and track it down back to this 
 
 If you are using a `BasicConfig`:
 ```ruby
+AppConfig = BasicConfig.load_env('config/application.yml', 'development')
 secret_token = AppConfig.something
 ```
-you'll get `NoMethodError` in that particular line with the name of the key that
-is missing.
+you'll get `BasicConfig` with a message similar to this:
+    
+    Configuration key 'development.something' is missing in config/application.yml
+
+if you're constructing BasicConfig with `new`, then it'll show source code
+location where BasicConfig is initialized.
+
+```ruby
+AppConfig = BasicConfig.new({ secret_token: 'something' })
+secret_token = AppConfig.secret_toklen # Note a typo here
+
+# Will result in exception:
+# BasicConfig::KeyNotFound: Configuration key 'secret_toklen' is missing in BasicConfig constructed at your_file.rb:5 in `new'
+```
 
 *Note:* There is also an `include?` method which you can use to check if
 particular key exist in your config - `AppConfig.include?(:something)`.
