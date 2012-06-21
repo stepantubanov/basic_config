@@ -6,16 +6,22 @@ describe BasicConfig do
       'one' => 'something',
       'two' => 'other_value',
       'three' => {
-        'nested' => '123'
+        'nested' => '123',
+        'more' => {
+          'param' => 'value'
+        }
       }
     }
   end
   let(:symbolized_hash) do
     {
-      :one => 'something',
-      :two => 'other_value',
-      :three => {
-        :nested => '123'
+      one: 'something',
+      two: 'other_value',
+      three: {
+        nested: '123',
+        more: {
+          param: 'value'
+        }
       }
     }
   end
@@ -93,6 +99,7 @@ describe BasicConfig do
     subject { exception.message }
     let(:original_config) { BasicConfig.new(hash) }
     let(:original_scoping) { '' }
+    let(:scoped_missing_key_name) { original_scoping + missing_key_name }
 
     shared_examples_for 'specific failure' do
       it 'contains the right location' do
@@ -100,14 +107,14 @@ describe BasicConfig do
       end
 
       it 'contains the right key' do
-        should include "'#{missing_key_name}'"
+        should include "'#{scoped_missing_key_name}'"
       end
     end
 
     shared_examples_for 'construction contexts' do
       context 'when constructed manually' do
         let(:original_config) { BasicConfig.new(hash) }
-        let(:location) { 'spec/basic_config_spec.rb:109' }
+        let(:location) { 'spec/basic_config_spec.rb:116' }
         
         it_behaves_like 'specific failure'
       end
@@ -143,14 +150,21 @@ describe BasicConfig do
 
     context 'top-level' do
       let(:config) { original_config }
-      let(:missing_key_name) { "#{original_scoping}missing_key" }
+      let(:missing_key_name) { 'missing_key' }
 
       it_behaves_like 'construction contexts'
     end
 
     context 'one-level in' do
       let(:config) { original_config.three }
-      let(:missing_key_name) { "#{original_scoping}three.missing_key" }
+      let(:missing_key_name) { 'three.missing_key' }
+
+      it_behaves_like 'construction contexts'
+    end
+
+    context 'two-levels in' do
+      let(:config) { original_config.three.more }
+      let(:missing_key_name) { 'three.more.missing_key' }
 
       it_behaves_like 'construction contexts'
     end
