@@ -88,7 +88,7 @@ AppConfig = BasicConfig.new({ secret_token: 'something' })
 secret_token = AppConfig.secret_toklen # Note a typo here
 
 # Will result in exception:
-# BasicConfig::yNotFound: Configuration key 'secret_toklen' is missing in BasicConfig constructed at your_file.rb:5 in `new'
+# BasicConfig::NotFound: Configuration key 'secret_toklen' is missing in BasicConfig constructed at your_file.rb:5 in `new'
 ```
 
 *Note:* There is also an `include?` method which you can use to check if
