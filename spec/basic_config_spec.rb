@@ -51,7 +51,7 @@ describe BasicConfig do
     should respond_to :three
     should_not respond_to :unknown
   end
-  
+
   it 'raises BasicConfig::KeyNotFound for unknown keys' do
     expect { subject.four }.to raise_error(BasicConfig::NotFound)
   end
@@ -87,7 +87,7 @@ describe BasicConfig do
       BasicConfig.load_env('file', environment).to_hash.should == expected_result
     end
   end
-  
+
   describe BasicConfig::NotFound do
     let(:exception) do
       begin
@@ -115,7 +115,7 @@ describe BasicConfig do
       context 'when constructed manually' do
         let(:original_config) { BasicConfig.new(hash) }
         let(:location) { 'spec/basic_config_spec.rb:116' }
-        
+
         it_behaves_like 'specific failure'
       end
 
@@ -123,7 +123,7 @@ describe BasicConfig do
         let(:content) { hash }
         let(:filename) { 'example.yml' }
         let(:location) { filename }
-        
+
         before do
           YAML.stub(:load_file).with(filename).and_return(content)
         end
